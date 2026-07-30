@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Site de casamento de Kaua e Debora.">
+    <title>Kaua + Debora | Nosso casamento</title>
+    <link rel="icon" href="img/gallery-3.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css?v=2">
+  </head>
+  <body>
+ 
+    <main id="conteudo">
+      <section class="hero section" aria-labelledby="hero-title">
+        <img class="hero-floral hero-floral-left" src="img/floral-corner.svg" alt="" aria-hidden="true">
+        
+        <img class="hero-floral hero-floral-right" src="img/floral-corner.svg" alt="" aria-hidden="true">
+        <img class="hero-photo" src="img/foto-casal.png" alt="Kaua e Debora">
+        <div class="hero-inner reveal">
+          <p class="eyebrow">com alegria, celebramos nosso amor</p>
+
+          <h1 id="hero-title">KAUÃ <em>♥︎</em> DEBORA</h1>
+          <p class="hero-date">21 . 11 . 2026</p>
+          <a class="round-link" href="#contagem" aria-label="Ver contagem regressiva">↓</a>
+        </div>
+        
+        
+        <div class="hero-arch" aria-hidden="true"><span></span><span></span><span></span></div>
+      </section>
+
+      <section class="countdown section section-soft" id="contagem" aria-labelledby="countdown-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">falta pouco</p>
+          <h2 id="countdown-title">Contagem regressiva</h2>
+          <div class="leaf-divider" aria-hidden="true">❦</div>
+        </div>
+        <div class="clock reveal" aria-live="polite">
+          <div><strong data-countdown="days">--</strong><span>dias</span></div>
+          <div><strong data-countdown="hours">--</strong><span>horas</span></div>
+          <div><strong data-countdown="minutes">--</strong><span>minutos</span></div>
+          <div><strong data-countdown="seconds">--</strong><span>segundos</span></div>
+        </div>
+        
+        
+      </section>
+
+
+
+      <section class="section godparents" id="padrinhos" aria-labelledby="godparents-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">quem caminha conosco</p>
+          <h2 id="godparents-title">Padrinhos</h2>
+          <div class="leaf-divider" aria-hidden="true">❦</div>
+          <p class="section-intro">Pessoas que conhecem nossos risos, acolhem nossos sonhos e estarão bem pertinho no altar.</p>
+        </div>
+
+
+
+
+
+
+      <section class="events section section-soft" aria-label="Detalhes dos eventos">
+        <article class="event-card reveal" id="recepcao">
+          <div class="event-icon" aria-hidden="true">✦</div>
+          <p class="eyebrow">para brindar</p>
+          <h2>Recepção</h2>
+          <p>Depois da cerimônia, continuamos a festa com música, abraços e muitas memórias para guardar.</p>
+          <dl><div><dt>Quando</dt><dd>17 de agosto de 2026<br>após a cerimônia</dd></div><div><dt>Onde</dt><dd>Fazenda da família<br>Itu, São Paulo</dd></div></dl>
+          <button class="outline-button" type="button" data-address="Fazenda da família, Itu - SP">Copiar endereço</button>
+        </article>
+      </section>
+
+      <section class="gallery section" aria-labelledby="gallery-title">
+        <div class="section-heading reveal"><p class="eyebrow"></p><h2 id="gallery-title"></h2><div class="leaf-divider" aria-hidden="true"></div></div>
+        <div class="gallery-frame reveal" data-gallery>
+          <div class="gallery-arrow previous" type="" aria-label="Foto anterior"></div>
+          <div class="">
+            
+          </div>
+          <div class="gallery-arrow next" type="" ></div>
+          <div class="gallery-dots" aria-label="Escolher foto"></div>
+        </div> 
+        
+      </section>
+
+
+
+      <section class="gifts section section-tint" id="presentes" aria-labelledby="gifts-title">
+        <div class="section-heading reveal"><p class="eyebrow">com carinho</p><h2 id="gifts-title">Lista de presentes</h2><div class="leaf-divider" aria-hidden="true">❦</div><p class="section-intro">Se quiser nos presentear, escolham algo que tenha a cara de um lar cheio de boas histórias.</p></div>
+        <div class="gift-toolbar reveal">
+          <p><span data-gift-showing>9</span> sugestões para celebrar com a gente</p>
+          <label>Ordenar por <select data-gift-sort aria-label="Ordenar lista de presentes"><option value="default">Destaques</option><option value="asc">Menor valor</option><option value="desc">Maior valor</option><option value="name">A-Z</option></select></label>
+        </div>
+        <div class="gift-grid" data-gift-grid></div>
+        <button class="outline-button centered" data-load-more type="button">Ver mais presentes</button>
+      </section>
+
+      <section class="rsvp section" id="rsvp" aria-labelledby="rsvp-title">
+        <div class="rsvp-heading reveal"><p class="eyebrow">nos conte</p><h2 id="rsvp-title">Você vem celebrar com a gente?</h2><p>A confirmação nos ajuda a deixar cada detalhe pronto para receber vocês.</p></div>
+        <form class="rsvp-form reveal" data-rsvp-form novalidate>
+          <div class="field field-full"><label for="rsvp-name">Nome completo</label><input id="rsvp-name" name="name" autocomplete="name" required></div>
+          <fieldset class="field-full attendance"><legend>Você estará presente?</legend><label><input type="radio" name="attendance" value="sim" required> Sim, estarei</label><label><input type="radio" name="attendance" value="nao"> Não conseguirei ir</label></fieldset>
+          <div class="field"><label for="rsvp-adults">Adultos, incluindo você</label><select id="rsvp-adults" name="adults"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
+          <div class="field"><label for="rsvp-children">Crianças</label><select id="rsvp-children" name="children"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+          <div class="field"><label for="rsvp-email">E-mail</label><input id="rsvp-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="rsvp-phone">Telefone</label><input id="rsvp-phone" name="phone" inputmode="tel" autocomplete="tel" required></div>
+          <div class="field field-full"><label for="rsvp-note">Observações</label><textarea id="rsvp-note" name="note" rows="3" placeholder="Alguma informação que devemos saber?"></textarea></div>
+          <label class="check field-full"><input type="checkbox" name="consent" required><span>Li e concordo com a utilização destas informações apenas para a organização da celebração.</span></label>
+          <div class="field-full form-actions"><button class="solid-button" type="submit">Enviar confirmação</button><p class="form-message" data-rsvp-message role="status"></p></div>
+        </form>
+      </section>
+
+      <section class="messages section section-soft" id="recados" aria-labelledby="messages-title">
+        <div class="messages-copy reveal"><p class="eyebrow">deixe uma lembrança</p><h2 id="messages-title">Recados</h2><p>Uma mensagem sua vai fazer parte das memórias que levaremos para sempre.</p></div>
+        <form class="message-form reveal" data-message-form novalidate>
+          <div class="field"><label for="message-name">Seu nome</label><input id="message-name" name="name" required></div>
+          <div class="field"><label for="message-email">Seu e-mail</label><input id="message-email" name="email" type="email" required></div>
+          <div class="field field-full"><label for="message-text">Seu recado</label><textarea id="message-text" name="message" rows="4" maxlength="400" required></textarea><small><span data-message-length>0</span>/400</small></div>
+          <label class="check field-full"><input type="checkbox" name="consent" required><span>Autorizo a exibição deste recado nesta página.</span></label>
+          <div class="field-full form-actions"><button class="solid-button" type="submit">Enviar recado</button><p class="form-message" data-message-message role="status"></p></div>
+        </form>
+        <div class="message-list" data-message-list aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="footer"><img src="img/floral-corner.svg" alt="" aria-hidden="true"><p>Kaua <span>+</span> Debora</p><small>Feito com amor para celebrar bons encontros.</small></footer>
+
+    <aside class="cart-drawer" data-cart-drawer aria-label="Carrinho de presentes" aria-hidden="true">
+      <div class="drawer-head"><div><p class="eyebrow">sua escolha</p><h2>Meu carrinho</h2></div><button class="icon-button" type="button" data-close-cart aria-label="Fechar carrinho">×</button></div>
+      <div class="cart-items" data-cart-items></div>
+      <div class="cart-summary" data-cart-summary hidden><p>Total <strong data-cart-total>R$ 0,00</strong></p><button class="solid-button" type="button" data-open-checkout>Continuar</button></div>
+    </aside>
+    <div class="backdrop" data-backdrop></div>
+
+    <dialog class="modal" data-modal="checkout">
+      <button class="modal-close" type="button" data-close-modal aria-label="Fechar">×</button>
+      <div class="checkout-content"><p class="eyebrow">quase lá</p><h2>Finalize seu presente</h2><p>Esta demonstração funciona totalmente offline. Ao concluir, seu presente será registrado apenas neste navegador.</p>
+        <form data-checkout-form novalidate><div class="field"><label for="buyer-name">Seu nome</label><input id="buyer-name" name="buyer" required></div><div class="field"><label for="buyer-email">Seu e-mail</label><input id="buyer-email" name="email" type="email" required></div><div class="field field-full"><label for="buyer-message">Mensagem para o casal</label><textarea id="buyer-message" name="message" rows="4" maxlength="400" placeholder="Escreva uma mensagem de carinho."></textarea></div><button class="solid-button" type="submit">Registrar presente</button><p class="form-message" data-checkout-message role="status"></p></form>
+      </div>
+    </dialog>
+    <dialog class="modal image-modal" data-modal="gallery"><button class="modal-close" type="button" data-close-modal aria-label="Fechar">×</button><img data-lightbox-image src="" alt=""></dialog>
+    <dialog class="modal mini-modal" data-modal="person"><button class="modal-close" type="button" data-close-modal aria-label="Fechar">×</button><p class="eyebrow">pessoa querida</p><h2 data-person-name></h2><p>É uma alegria enorme dividir este dia com alguém tão especial em nossa caminhada.</p></dialog>
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
