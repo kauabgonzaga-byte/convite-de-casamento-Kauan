@@ -28,7 +28,7 @@ function renderSelectedGift() {
   const gift = selectedGift();
   input.value = gift ? gift.id : '';
   panel.hidden = !gift;
-  panel.innerHTML = gift ? `<small>Presente escolhido</small><strong>${escapeHtml(gift.name)}</strong><button class="selected-gift-clear" type="button" data-clear-gift>Trocar</button>` : '';
+  panel.innerHTML = gift ? `<small>Presente escolhido</small><strong>${escapeHtml(gift.name)}</strong><p>Ele será reservado ao enviar sua confirmação de presença.</p><button class="selected-gift-clear" type="button" data-clear-gift>Trocar</button>` : '';
 }
 
 function setMessage(message, error = false) {
@@ -60,11 +60,29 @@ function initInterface() {
   const menuButton = $('[data-menu-toggle]');
   const menu = $('[data-site-nav]');
   menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') !== 'true'; menuButton.setAttribute('aria-expanded', String(open)); menu.classList.toggle('open', open); });
+  menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) {
+      menuButton.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open');
+    }
+  });
   document.addEventListener('click', (event) => {
     const choice = event.target.closest('[data-select-gift]');
-    if (choice) { selectedGiftId = choice.dataset.selectGift; renderSelectedGift(); $('#rsvp').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (choice) {
+      selectedGiftId = choice.dataset.selectGift;
+      $('[name="attendance"][value="sim"]').checked = true;
+      renderSelectedGift();
+      $('#rsvp').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     if (event.target.closest('[data-clear-gift]')) { selectedGiftId = ''; renderSelectedGift(); }
   });
+  $$('[name="attendance"]').forEach((input) => input.addEventListener('change', () => {
+    if (input.value === 'nao' && input.checked && selectedGiftId) {
+      selectedGiftId = '';
+      renderSelectedGift();
+      setMessage('A escolha do presente foi removida, pois ela é reservada apenas para quem confirmar presença.', true);
+    }
+  }));
   $$('[data-copy-address]').forEach((button) => button.addEventListener('click', async () => { const original = button.textContent; try { await navigator.clipboard.writeText(button.dataset.copyAddress); button.textContent = 'Endereço copiado'; } catch { button.textContent = button.dataset.copyAddress; } setTimeout(() => { button.textContent = original; }, 2500); }));
   const topbar = $('[data-topbar]');
   addEventListener('scroll', () => topbar.classList.toggle('scrolled', scrollY > 4), { passive: true });
@@ -83,7 +101,8 @@ function initRsvp() {
     button.disabled = true;
     setMessage('');
     try {
-      const response = await fetch('/api/public', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'rsvp', name: values.get('name'), email: values.get('email'), phone: values.get('phone'), attendance: values.get('attendance'), adults: values.get('adults'), children: values.get('children'), note: values.get('note'), consent: values.get('consent') === 'on', giftId: selectedGiftId }) });
+      const attendance = values.get('attendance');
+      const response = await fetch('/api/public', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'rsvp', name: values.get('name'), email: values.get('email'), phone: values.get('phone'), attendance, adults: values.get('adults'), children: values.get('children'), note: values.get('note'), consent: values.get('consent') === 'on', giftId: attendance === 'sim' ? selectedGiftId : '' }) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Não foi possível enviar a confirmação.');
       form.reset(); selectedGiftId = ''; setMessage(data.message); await loadGifts();

@@ -18,7 +18,11 @@ export default {
       if (!name || !/^\S+@\S+\.\S+$/.test(email) || !phone || !attendance || body.consent !== true) {
         throw new HttpError(400, 'Preencha nome, e-mail, telefone, presença e autorização corretamente.');
       }
-      const confirmation = await saveConfirmation({ name, email, phone, attendance, adults, children, note: safeText(body.note, 500), giftId: safeText(body.giftId, 100) });
+      const giftId = safeText(body.giftId, 100);
+      if (giftId && attendance !== 'sim') {
+        throw new HttpError(400, 'Para escolher um presente, confirme que estará presente.');
+      }
+      const confirmation = await saveConfirmation({ name, email, phone, attendance, adults, children, note: safeText(body.note, 500), giftId });
       const message = confirmation.gift_name ? `Obrigada! Sua presença e o presente “${confirmation.gift_name}” foram registrados.` : 'Obrigada! Sua confirmação foi registrada.';
       return json({ ok: true, message });
     } catch (error) {
