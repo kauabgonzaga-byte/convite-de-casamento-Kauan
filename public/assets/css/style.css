@@ -160,6 +160,7 @@ h2 { color: var(--deep); font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -.
 .selected-gift small { color: var(--rose); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .selected-gift strong { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; }
 .selected-gift a { width: max-content; margin-top: .25rem; border-bottom: 1px solid var(--rose); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.selected-gift-clear { width: max-content; margin-top: .25rem; padding: 0; border: 0; border-bottom: 1px solid var(--rose); color: var(--deep); background: transparent; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .notice { margin: 0; padding: .85rem 1rem; border-left: 3px solid; font-size: .86rem; }
 .notice.success { border-color: #5a8567; background: #e8f0e8; color: #315d40; }
 .notice.error { border-color: #a45450; background: #f7e8e7; color: #873c38; }
