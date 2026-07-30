@@ -19,7 +19,11 @@ export default {
         throw new HttpError(400, 'Preencha nome, e-mail, telefone, presença e autorização corretamente.');
       }
       const confirmation = await saveConfirmation({ name, email, phone, attendance, adults, children, note: safeText(body.note, 500), giftId: safeText(body.giftId, 100) });
-      const message = confirmation.gift_name ? `Obrigada! Sua presença e o presente “${confirmation.gift_name}” foram registrados.` : 'Obrigada! Sua confirmação foi registrada.';
+      const message = confirmation.gift_name
+        ? confirmation.attendance === 'sim'
+          ? `Obrigada! Sua presença e o presente “${confirmation.gift_name}” foram registrados.`
+          : `Obrigada! O presente “${confirmation.gift_name}” foi registrado. Sentiremos sua falta na celebração.`
+        : 'Obrigada! Sua confirmação foi registrada.';
       return json({ ok: true, message });
     } catch (error) {
       return errorResponse(error);
