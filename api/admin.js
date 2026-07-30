@@ -10,7 +10,7 @@ function requireAdmin(request) {
 }
 
 async function removeBlob(url) {
-  if (!url || !process.env.BLOB_READ_WRITE_TOKEN) return;
+  if (!url) return;
   try { await del(url); } catch (error) { console.error('Não foi possível remover a imagem antiga:', error); }
 }
 
