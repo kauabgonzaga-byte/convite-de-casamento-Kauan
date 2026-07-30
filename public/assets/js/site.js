@@ -94,7 +94,7 @@ function initRsvp() {
     setMessage('');
     try {
       const attendance = values.get('attendance');
-      const response = await fetch('/api/public', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'rsvp', name: values.get('name'), email: values.get('email'), phone: values.get('phone'), attendance, adults: values.get('adults'), children: values.get('children'), note: values.get('note'), consent: values.get('consent') === 'on', giftId: selectedGiftId }) });
+      const response = await fetch('/api/public', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'rsvp', name: values.get('name'), phone: values.get('phone'), attendance, adults: values.get('adults'), children: values.get('children'), note: values.get('note'), consent: values.get('consent') === 'on', giftId: selectedGiftId }) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Não foi possível enviar a confirmação.');
       form.reset(); selectedGiftId = ''; setMessage(data.message); await loadGifts();

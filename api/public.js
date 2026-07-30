@@ -10,15 +10,14 @@ export default {
       const body = await readJson(request);
       if (body.action !== 'rsvp') throw new HttpError(400, 'Ação inválida.');
       const name = safeText(body.name, 100);
-      const email = safeText(body.email, 150);
       const phone = safeText(body.phone, 40);
       const attendance = body.attendance === 'nao' ? 'nao' : body.attendance === 'sim' ? 'sim' : '';
       const adults = attendance === 'nao' ? 0 : Math.max(1, Math.min(20, Number.parseInt(body.adults, 10) || 1));
       const children = attendance === 'nao' ? 0 : Math.max(0, Math.min(20, Number.parseInt(body.children, 10) || 0));
-      if (!name || !/^\S+@\S+\.\S+$/.test(email) || !phone || !attendance || body.consent !== true) {
-        throw new HttpError(400, 'Preencha nome, e-mail, telefone, presença e autorização corretamente.');
+      if (!name || !phone || !attendance || body.consent !== true) {
+        throw new HttpError(400, 'Preencha nome, telefone, presença e autorização corretamente.');
       }
-      const confirmation = await saveConfirmation({ name, email, phone, attendance, adults, children, note: safeText(body.note, 500), giftId: safeText(body.giftId, 100) });
+      const confirmation = await saveConfirmation({ name, email: '', phone, attendance, adults, children, note: safeText(body.note, 500), giftId: safeText(body.giftId, 100) });
       const message = confirmation.gift_name
         ? confirmation.attendance === 'sim'
           ? `Obrigada! Sua presença e o presente “${confirmation.gift_name}” foram registrados.`
