@@ -1,0 +1,110 @@
+[
+    {
+        "id": "cesto",
+        "name": "Cesto dobrável",
+        "price": 42.9,
+        "icon": "⌁",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "tapete",
+        "name": "Tapete para o banho",
+        "price": 66.5,
+        "icon": "▧",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "potes",
+        "name": "Conjunto de potes",
+        "price": 75.8,
+        "icon": "◌",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "escorredor",
+        "name": "Escorredor de louças",
+        "price": 82.4,
+        "icon": "⌇",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "passadeira",
+        "name": "Passadeira para cozinha",
+        "price": 95.7,
+        "icon": "▤",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "facas",
+        "name": "Jogo de facas",
+        "price": 130.2,
+        "icon": "†",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "pipoqueira",
+        "name": "Pipoqueira elétrica",
+        "price": 144.8,
+        "icon": "◒",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "fondue",
+        "name": "Aparelho para fondue",
+        "price": 160.9,
+        "icon": "♨",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "chaleira",
+        "name": "Chaleira elétrica",
+        "price": 189,
+        "icon": "♨",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "ferro",
+        "name": "Ferro a vapor",
+        "price": 190.1,
+        "icon": "⌁",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "tacas",
+        "name": "Taças para brindar",
+        "price": 217.9,
+        "icon": "♕",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    },
+    {
+        "id": "frigideiras",
+        "name": "Conjunto de frigideiras",
+        "price": 226.7,
+        "icon": "◉",
+        "status": "available",
+        "reserved_by": "",
+        "reserved_at": null
+    }
+]
