@@ -155,6 +155,7 @@ h2 { color: var(--deep); font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -.
 .gift-card-reserved { opacity: .68; filter: grayscale(.2); }
 .gift-card-reserved:hover { box-shadow: 0 4px 18px rgba(49,73,63,.06); transform: none; }
 .gift-status { display: block; width: 100%; padding: .68rem; border: 1px solid var(--line); color: #78847e; font-size: .66rem; font-weight: 700; letter-spacing: .11em; text-align: center; text-transform: uppercase; }
+.gift-availability { margin: -.55rem 0 .85rem; color: #6a7c72; font-size: .72rem; }
 .selected-gift { display: grid; gap: .15rem; margin-top: 1.8rem; padding: 1rem; border-left: 2px solid var(--rose); background: var(--cream); color: var(--deep); }
 .selected-gift small { color: var(--rose); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .selected-gift strong { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; }

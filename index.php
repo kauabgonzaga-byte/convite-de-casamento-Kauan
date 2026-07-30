@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'rsvp'
 $gifts = read_json('gifts');
 $selectedGiftId = clean_text($_GET['gift'] ?? '', 80);
 $selectedGift = gift_by_id($gifts, $selectedGiftId);
-if ($selectedGift !== null && ($selectedGift['status'] ?? 'available') !== 'available') {
+if ($selectedGift !== null && !gift_has_slots($selectedGift)) {
     $selectedGift = null;
     $selectedGiftId = '';
 }
@@ -89,7 +89,18 @@ require __DIR__ . '/includes/header.php';
       </article>
     </section>
 
-   
+    <section class="gallery section" aria-labelledby="gallery-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">instantes que guardamos</p>
+        <h2 id="gallery-title">Nosso caminho</h2>
+        <div class="leaf-divider" aria-hidden="true">❦</div>
+      </div>
+      <div class="gallery-grid reveal">
+        <?php foreach (['gallery-1.svg', 'gallery-2.svg', 'gallery-3.svg', 'gallery-4.svg', 'gallery-5.svg'] as $index => $image): ?>
+          <img src="assets/images/<?= h($image) ?>" alt="Ilustração decorativa <?= $index + 1 ?>">
+        <?php endforeach; ?>
+      </div>
+    </section>
 
     <section class="gifts section section-tint" id="presentes" aria-labelledby="gifts-title">
       <div class="section-heading reveal">
@@ -101,16 +112,17 @@ require __DIR__ . '/includes/header.php';
       <div class="gift-toolbar reveal"><p><span><?= count($gifts) ?></span> sugestões para celebrar com a gente</p><p>Itens reservados aparecem indisponíveis.</p></div>
       <div class="gift-grid">
         <?php foreach ($gifts as $gift): ?>
-          <?php $available = ($gift['status'] ?? 'available') === 'available'; $giftImage = gift_image_path($gift['image'] ?? null) !== null ? (string) $gift['image'] : ''; ?>
+          <?php $available = gift_has_slots($gift); $giftImage = gift_image_path($gift['image'] ?? null) !== null ? (string) $gift['image'] : ''; $remainingSlots = gift_reservation_limit($gift) - gift_reservation_count($gift); ?>
           <article class="gift-card<?= $available ? '' : ' gift-card-reserved' ?> reveal">
             <div class="gift-art<?= $giftImage !== '' ? ' has-image' : '' ?>" aria-hidden="true"><?php if ($giftImage !== ''): ?><img src="<?= h($giftImage) ?>" alt=""><?php else: ?><span><?= h($gift['icon'] ?? '✦') ?></span><?php endif; ?></div>
             <div class="gift-info">
               <h3><?= h($gift['name'] ?? 'Presente') ?></h3>
               <p class="gift-price"><?= format_brl($gift['price'] ?? 0) ?></p>
               <?php if ($available): ?>
+                <p class="gift-availability"><?= $remainingSlots ?> <?= $remainingSlots === 1 ? 'escolha disponível' : 'escolhas disponíveis' ?></p>
                 <a class="outline-button gift-choice" href="?gift=<?= rawurlencode((string) $gift['id']) ?>#rsvp">Escolher presente</a>
               <?php else: ?>
-                <span class="gift-status">Já escolhido</span>
+                <span class="gift-status">Indisponível</span>
               <?php endif; ?>
             </div>
           </article>

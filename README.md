@@ -20,7 +20,8 @@ Troque a senha antes de publicar, gerando um hash novo com o comando indicado em
 ## Como funciona
 
 - O convidado escolhe um presente e confirma os dados no formulário.
-- A reserva usa bloqueio de arquivo para impedir que duas pessoas reservem o mesmo item ao mesmo tempo.
+- Cada presente tem um limite de escolhas configurável no painel. Por exemplo, limite `2` permite duas escolhas e torna o item indisponível na terceira tentativa.
+- A reserva usa bloqueio de arquivo para impedir que o limite seja ultrapassado quando há confirmações ao mesmo tempo.
 - No painel, é possível adicionar, editar, fotografar, liberar ou remover presentes, ver e exportar confirmações e remover respostas.
 - As fotos podem ser JPG, PNG, WEBP ou GIF e têm limite de 5 MB por arquivo.
 - Os arquivos JSON podem ser editados manualmente quando o site não estiver recebendo confirmações.

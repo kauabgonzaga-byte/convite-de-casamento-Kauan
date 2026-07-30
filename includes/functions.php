@@ -139,6 +139,42 @@ function gift_by_id(array $gifts, string $id): ?array
     return null;
 }
 
+function gift_reservation_limit(array $gift): int
+{
+    return max(1, min(50, (int) ($gift['reservation_limit'] ?? 1)));
+}
+
+function gift_reservations(array $gift): array
+{
+    if (isset($gift['reservations']) && is_array($gift['reservations'])) {
+        return array_values(array_filter($gift['reservations'], static fn ($reservation): bool => is_array($reservation) && !empty($reservation['name'])));
+    }
+
+    // Mantém compatibilidade com presentes reservados antes da criação do limite.
+    if (!empty($gift['reserved_by'])) {
+        return [[
+            'name' => (string) $gift['reserved_by'],
+            'reserved_at' => $gift['reserved_at'] ?? null,
+        ]];
+    }
+    return [];
+}
+
+function gift_reservation_count(array $gift): int
+{
+    return count(gift_reservations($gift));
+}
+
+function gift_has_slots(array $gift): bool
+{
+    return gift_reservation_count($gift) < gift_reservation_limit($gift);
+}
+
+function gift_reserver_names(array $gift): array
+{
+    return array_values(array_filter(array_map(static fn (array $reservation): string => clean_text($reservation['name'] ?? '', 100), gift_reservations($gift))));
+}
+
 function gift_image_path(?string $image): ?string
 {
     if (!is_string($image) || !preg_match('#^assets/images/gifts/[a-f0-9]{32}\.(?:jpg|png|webp|gif)$#', $image)) {
@@ -221,19 +257,26 @@ function save_confirmation(array $input): array
         $children = 0;
     }
 
+    $confirmationId = bin2hex(random_bytes(8));
     $giftName = '';
     if ($giftId !== '') {
-        $giftName = update_json('gifts', function (array &$gifts) use ($giftId, $name): string {
+        $giftName = update_json('gifts', function (array &$gifts) use ($giftId, $name, $confirmationId): string {
             foreach ($gifts as &$gift) {
                 if (($gift['id'] ?? '') !== $giftId) {
                     continue;
                 }
-                if (($gift['status'] ?? 'available') !== 'available') {
-                    throw new RuntimeException('Este presente acabou de ser escolhido. Selecione outro item.');
+                $limit = gift_reservation_limit($gift);
+                $reservations = gift_reservations($gift);
+                if (count($reservations) >= $limit) {
+                    throw new RuntimeException('Este presente já atingiu o limite de escolhas. Selecione outro item.');
                 }
-                $gift['status'] = 'reserved';
-                $gift['reserved_by'] = $name;
-                $gift['reserved_at'] = date(DATE_ATOM);
+                $reservedAt = date(DATE_ATOM);
+                $reservations[] = ['confirmation_id' => $confirmationId, 'name' => $name, 'reserved_at' => $reservedAt];
+                $gift['reservation_limit'] = $limit;
+                $gift['reservations'] = $reservations;
+                $gift['status'] = count($reservations) >= $limit ? 'reserved' : 'available';
+                $gift['reserved_by'] = implode(', ', gift_reserver_names($gift));
+                $gift['reserved_at'] = $reservedAt;
                 return (string) ($gift['name'] ?? 'Presente');
             }
             throw new RuntimeException('O presente selecionado não está mais disponível.');
@@ -241,7 +284,7 @@ function save_confirmation(array $input): array
     }
 
     $confirmation = [
-        'id' => bin2hex(random_bytes(8)),
+        'id' => $confirmationId,
         'name' => $name,
         'email' => $email,
         'phone' => $phone,

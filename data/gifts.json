@@ -40,9 +40,17 @@
         "name": "Passadeira para cozinha",
         "price": 95.7,
         "icon": "▤",
-        "status": "available",
-        "reserved_by": "",
-        "reserved_at": null
+        "status": "reserved",
+        "reserved_by": "dsadsa",
+        "reserved_at": "2026-07-30T20:50:09+02:00",
+        "reservation_limit": 1,
+        "reservations": [
+            {
+                "confirmation_id": "3fce0cf1a35256ca",
+                "name": "dsadsa",
+                "reserved_at": "2026-07-30T20:50:09+02:00"
+            }
+        ]
     },
     {
         "id": "facas",
